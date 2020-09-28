@@ -15,3 +15,24 @@ tableData.forEach((ufoSighting) => {
   });
 });
 
+// Button
+var button = d3.select("#filter-btn");
+button.on("click", function() {
+    tbody.html("");
+
+    // select user input
+    var userInput = d3.select("#datetime");
+    var userInputValue = userInput.property("value");
+    // create filter
+    var filteredData = tableData.filter(ufoSighting => ufoSighting.datetime === userInputValue);
+
+    filteredData.forEach((selections) => {
+        var row = tbody.append("tr");
+        Object.entries(selections).forEach(([key, value]) => {
+            var cell = row.append("td");
+            cell.text(value); 
+        });
+    
+    });
+});
+
